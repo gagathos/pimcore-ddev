@@ -69,4 +69,62 @@ web/wp-content/index.php
 .idea/
 .vscode/
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# WordPress specific
+/web/wp-admin/
+/web/wp-includes/
+/web/wp-content/uploads/
+/web/wp-content/upgrade/
+/web/wp-content/cache/
+/web/wp-content/backup-db/
+/web/wp-content/backups/
+/web/wp-content/blogs.dir/
+/web/wp-content/upgrade/
+/web/wp-content/plugins/*
+!/web/wp-content/plugins/.gitkeep
+/web/wp-content/themes/*
+!/web/wp-content/themes/.gitkeep
+/web/.htaccess
+/web/index.php
+/web/license.txt
+/web/readme.html
+/web/wp-*.php
+/web/xmlrpc.php
+
+# Pimcore specific
+/pimcore/var/*
+!/pimcore/var/.gitkeep
+!/pimcore/var/classes/
+/pimcore/var/classes/DataObject
+!/pimcore/var/config
+/pimcore/var/config/system.yml
+/pimcore/var/config/maintenance.php
+/pimcore/var/config/tag-manager.php
+/pimcore/var/config/reports.php
+/pimcore/public/var/
+/pimcore/public/bundles/
+/pimcore/public/sitemap*.xml
+
+# Symfony specific
+/.env.local
+/.env.local.php
+/.env.*.local
+/build/
+/phpunit.xml
+
+# DDEV specific
+/.ddev/docker-compose.*.yaml
+/.ddev/db_snapshots
+/.ddev/sequelpro.spf
+/.ddev/import-db
+/.ddev/import.yaml
+/.ddev/homeadditions
+
+# Temp files
+*.swp
+*.swo
+*~
+.php-cs-fixer.cache
+.php-cs-fixer.php
+.web-server-pid 

@@ -4,8 +4,13 @@
     "type": "project",
     "require": {
         "php": "^8.2",
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
+        "doctrine/orm": "^3.3",
         "johnpbloch/wordpress": "^6.4",
+        "pimcore/admin-ui-classic-bundle": "^1.7",
         "pimcore/pimcore": "^11.0",
+        "symfony/orm-pack": "^2.4",
         "wpackagist-plugin/woocommerce": "^8.0"
     },
     "repositories": [
@@ -46,4 +51,4 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
-} 
+}
