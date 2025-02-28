@@ -2,41 +2,78 @@
 /vendor/
 composer.phar
 
-# WordPress
+# WordPress core files
 /web/wp-admin/
 /web/wp-includes/
-/web/wp-content/uploads/
-/web/wp-content/upgrade/
-/web/wp-content/backup-db/
-/web/wp-content/cache/
-/web/wp-content/backups/
-/web/wp-*.php
 /web/index.php
-/web/xmlrpc.php
 /web/license.txt
 /web/readme.html
+/web/wp-*.php
+/web/xmlrpc.php
+/web/composer.json
+/web/.gitignore
+
+# WordPress configuration
+/web/wp-config.php
+/web/wp-config-ddev.php
+/web/wp-config-sample.php
+
+# WordPress content
+/web/wp-content/plugins/*
+!/web/wp-content/plugins/.gitkeep
+/web/wp-content/themes/*
+!/web/wp-content/themes/.gitkeep
+/web/wp-content/upgrade/
+/web/wp-content/uploads/
+/web/wp-content/cache/
+/web/wp-content/mu-plugins/
+/web/wp-content/languages/
+/web/wp-content/debug.log
 
 # Pimcore
 /pimcore/var/
-/pimcore/public/bundles/
-/pimcore/public/var/
+/pimcore/public/
+/pimcore/vendor/
 /pimcore/config/local/
+/pimcore/config/*.local.php
+/pimcore/.env
+/pimcore/composer.lock
+/pimcore/symfony.lock
+/pimcore/.php-cs-fixer.cache
+/pimcore/codeception.yml
+/pimcore/docker-compose.yaml
+/pimcore/.docker/
+/pimcore/tests/_output/
+/pimcore/tests/_support/_generated/
+
+# Keep Pimcore configuration
+!/pimcore/config/
+!/pimcore/config/*.yaml
+!/pimcore/config/*.xml
+!/pimcore/config/*.php
+!/pimcore/templates/
+!/pimcore/src/
+!/pimcore/translations/
+!/pimcore/bin/
 
 # DDEV
-.ddev/db_snapshots/
-.ddev/.webimageBuild/
-.ddev/.dbimageBuild/
-.ddev/import-db/
-.ddev/commands/host/
-.ddev/homeadditions/
-.ddev/import-files/
+.ddev/*
+!.ddev/config.yaml
+!.ddev/docker-compose.*.yaml
+!.ddev/nginx/
+!.ddev/nginx_full/
+!.ddev/php/
+!.ddev/apache/
+!.ddev/mysql/
+!.ddev/commands/
+!.ddev/homeadditions/
 
-# Environment
+# Environment files
 .env
 .env.local
 .env.*.local
 
-# IDE & System Files
+# IDE and system files
 .idea/
 .vscode/
 .DS_Store
