@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  web:
+    environment:
+      - NGINX_SITE_TEMPLATE=nginx/fastcgi.tmpl
+      - NGINX_DOCROOT=/var/www/html/public
+      - NGINX_FASTCGI_PASS=pimcore:9000
+    volumes:
+      - type: bind
+        source: ../pimcore
+        target: /var/www/html/pimcore 

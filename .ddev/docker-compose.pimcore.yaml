@@ -1,0 +1,25 @@
+services:
+  pimcore:
+    container_name: ddev-${DDEV_SITENAME}-pimcore
+    image: pimcore/pimcore:php8.2-latest
+    restart: always
+    environment:
+      - PIMCORE_DB_DSN=mysql://db:db@db/pimcore
+      - PIMCORE_ADMIN_USERNAME=admin
+      - PIMCORE_ADMIN_PASSWORD=admin
+      - PIMCORE_ENVIRONMENT=dev
+    volumes:
+      - type: bind
+        source: ../pimcore
+        target: /var/www/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${DDEV_SITENAME}-pimcore.rule=Host(`pimcore.${DDEV_SITENAME}.ddev.site`)"
+      - "traefik.http.services.${DDEV_SITENAME}-pimcore.loadbalancer.server.port=9000"
+    networks:
+      - ddev_default
+
+networks:
+  ddev_default:
+    external: true
+
