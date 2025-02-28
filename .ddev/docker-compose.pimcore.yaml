@@ -3,13 +3,14 @@ services:
     container_name: ddev-${DDEV_SITENAME}-pimcore
     image: pimcore/pimcore:php8.2-latest
     restart: always
+    user: "www-data:www-data"
     environment:
       - PIMCORE_INSTALL_ADMIN_USERNAME=admin
       - PIMCORE_INSTALL_ADMIN_PASSWORD=admin
       - PIMCORE_INSTALL_MYSQL_HOST_SOCKET=db:3306
       - PIMCORE_INSTALL_MYSQL_USERNAME=db
       - PIMCORE_INSTALL_MYSQL_PASSWORD=db
-      - PIMCORE_INSTALL_MYSQL_DATABASE=pimcore
+      - PIMCORE_INSTALL_MYSQL_DATABASE=pimcore-db
       - APP_ENV=dev
       - APP_DEBUG=1
     volumes:

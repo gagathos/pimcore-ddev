@@ -1,0 +1,58 @@
+#!/bin/bash
+
+## Description: Install Pimcore in the current directory
+## Usage: pimcore-install
+## Example: "ddev pimcore-install"
+## ExecService: pimcore
+
+# Exit on error
+set -e
+
+echo "Starting Pimcore installation..."
+
+# Create required directories with proper permissions
+echo "Creating required directories..."
+runuser -u www-data -- mkdir -p var/cache var/classes var/config var/installer var/log var/tmp var/versions public/var
+chown -R www-data:www-data var public/var
+chmod -R g+w var public/var
+
+# Install Pimcore dependencies if needed
+echo "Installing Composer dependencies..."
+runuser -u www-data -- composer install --no-interaction
+
+# Initialize the Pimcore install
+echo "Initializing Pimcore..."
+runuser -u www-data -- bin/console pimcore:system:config-normalize
+runuser -u www-data -- bin/console pimcore:install \
+    --admin-username=admin \
+    --admin-password=admin \
+    --mysql-host-socket=db \
+    --mysql-username=db \
+    --mysql-password=db \
+    --mysql-database=pimcore \
+    --no-interaction
+
+# Clear cache and warm up as www-data
+echo "Clearing and warming up cache..."
+runuser -u www-data -- bin/console cache:clear
+runuser -u www-data -- bin/console cache:warmup
+
+# Generate assets
+echo "Installing assets..."
+runuser -u www-data -- bin/console assets:install public
+runuser -u www-data -- bin/console pimcore:web2print:pdf-config
+
+# Final permission adjustments
+echo "Setting final permissions..."
+chown -R www-data:www-data var public/var
+chmod -R g+w var public/var
+
+echo "✅ Pimcore has been installed successfully!"
+echo "You can access the admin interface at: https://pimcore.$(ddev describe -j | jq -r .raw.primary_url | sed 's/https:\/\///')/admin"
+echo "Username: admin"
+echo "Password: admin"
+
+echo "If you experience any issues with the admin interface:"
+echo "1. Clear your browser cache"
+echo "2. Try running: ddev exec -s pimcore 'bin/console cache:clear && bin/console assets:install'"
+echo "3. Check the logs at: var/log/" 
