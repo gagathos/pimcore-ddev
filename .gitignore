@@ -29,6 +29,9 @@ composer.phar
 /web/wp-content/mu-plugins/
 /web/wp-content/languages/
 /web/wp-content/debug.log
+web/wp-content/uploads
+web/wp-content/plugins
+web/wp-content/index.php
 
 # Pimcore - ignore everything by default
 /pimcore/*
