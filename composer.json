@@ -1,0 +1,49 @@
+{
+    "name": "pimcore-wordpress/project",
+    "description": "Project managing both Pimcore and WordPress installations",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "johnpbloch/wordpress": "^6.4",
+        "pimcore/pimcore": "^11.0",
+        "wpackagist-plugin/woocommerce": "^8.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+        }
+    ],
+    "extra": {
+        "wordpress-install-dir": "web",
+        "pimcore-install-dir": "pimcore",
+        "installer-paths": {
+            "web/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "web/wp-content/themes/{$name}/": ["type:wordpress-theme"],
+            "pimcore/bundles/{$name}/": ["type:pimcore-bundle"]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true,
+            "composer/installers": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true,
+        "vendor-dir": "vendor"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@pimcore-scripts"
+        ],
+        "post-update-cmd": [
+            "@pimcore-scripts"
+        ],
+        "pimcore-scripts": [
+            "Pimcore\\Composer::postInstall"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+} 

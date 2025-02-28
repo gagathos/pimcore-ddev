@@ -1,0 +1,43 @@
+# Composer
+/vendor/
+composer.phar
+
+# WordPress
+/web/wp-admin/
+/web/wp-includes/
+/web/wp-content/uploads/
+/web/wp-content/upgrade/
+/web/wp-content/backup-db/
+/web/wp-content/cache/
+/web/wp-content/backups/
+/web/wp-*.php
+/web/index.php
+/web/xmlrpc.php
+/web/license.txt
+/web/readme.html
+
+# Pimcore
+/pimcore/var/
+/pimcore/public/bundles/
+/pimcore/public/var/
+/pimcore/config/local/
+
+# DDEV
+.ddev/db_snapshots/
+.ddev/.webimageBuild/
+.ddev/.dbimageBuild/
+.ddev/import-db/
+.ddev/commands/host/
+.ddev/homeadditions/
+.ddev/import-files/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE & System Files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db 

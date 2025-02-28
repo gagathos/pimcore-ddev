@@ -4,18 +4,25 @@ services:
     image: pimcore/pimcore:php8.2-latest
     restart: always
     environment:
-      - PIMCORE_DB_DSN=mysql://db:db@db/pimcore
-      - PIMCORE_ADMIN_USERNAME=admin
-      - PIMCORE_ADMIN_PASSWORD=admin
-      - PIMCORE_ENVIRONMENT=dev
+      - PIMCORE_INSTALL_ADMIN_USERNAME=admin
+      - PIMCORE_INSTALL_ADMIN_PASSWORD=admin
+      - PIMCORE_INSTALL_MYSQL_HOST_SOCKET=db:3306
+      - PIMCORE_INSTALL_MYSQL_USERNAME=db
+      - PIMCORE_INSTALL_MYSQL_PASSWORD=db
+      - PIMCORE_INSTALL_MYSQL_DATABASE=pimcore
+      - APP_ENV=dev
+      - APP_DEBUG=1
     volumes:
       - type: bind
         source: ../pimcore
         target: /var/www/html
+      - type: bind
+        source: ./.pimcore-nginx.conf
+        target: /etc/nginx/conf.d/default.conf
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${DDEV_SITENAME}-pimcore.rule=Host(`pimcore.${DDEV_SITENAME}.ddev.site`)"
-      - "traefik.http.services.${DDEV_SITENAME}-pimcore.loadbalancer.server.port=9000"
+      - "traefik.http.services.${DDEV_SITENAME}-pimcore.loadbalancer.server.port=80"
     networks:
       - ddev_default
 

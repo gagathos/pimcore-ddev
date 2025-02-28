@@ -16,7 +16,12 @@ web_environment: []
 corepack_enable: false
 hooks:
   post-start:
-    - exec: mysql -udb -pdb -e "CREATE DATABASE IF NOT EXISTS pimcore;"
+    - exec: |
+        mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS db;"
+        mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS pimcore;"
+        mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON db.* TO 'db'@'%';"
+        mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON pimcore.* TO 'db'@'%';"
+        mysql -uroot -proot -e "FLUSH PRIVILEGES;"
 
 # Key features of DDEV's config.yaml:
 
